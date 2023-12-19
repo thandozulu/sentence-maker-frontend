@@ -13,12 +13,12 @@ export class SentenceComponent {
   wordTypes: Type[] = [];
   selectedType: number | null = null;
   selectedWord: string | null = null;
-  sentence: string = "";
+  sentence: string = '';
   words: Word[] = [];
   sentences: Sentence[] = [];
 
-  constructor(private sentenceService: SentenceService) {
-  }
+  constructor(private sentenceService: SentenceService) {}
+
   ngOnInit(): void {
     this.selectedType = null;
     this.selectedWord = null;
@@ -26,10 +26,11 @@ export class SentenceComponent {
     this.getSentences();
   }
   getSentences() {
-    this.sentenceService.getSentences().subscribe((sentence: Sentence[]) =>{
+    this.sentences = [];
+    this.sentenceService.getSentences().subscribe((sentence: Sentence[]) => {
       this.sentences = sentence;
+      console.log(this.sentences);
     });
-    console.log(this.sentences);
   }
 
   getWordTypes() {
@@ -43,30 +44,51 @@ export class SentenceComponent {
     console.log('Get words by type : ' + type);
     if (type) {
       this.sentenceService.getWordsByType(type).subscribe((words) => {
-        this.words = words.map((word) => new Word(word.id, word.name, word.type));
+        this.words = words.map(
+          (word) => new Word(word.id, word.name, word.type)
+        );
       });
     }
   }
 
   addToSentence() {
-    console.log("Selected Word: " + this.selectedWord);
+    console.log('Selected Word: ' + this.selectedWord);
     if (this.selectedWord) {
-      this.sentence += (" " + this.selectedWord);
+      this.sentence += ' ' + this.selectedWord;
       this.selectedWord = null;
+      this.selectedType = null;
     }
   }
 
   submitSentence() {
-    if(this.sentence){
-      this.sentenceService.createSentence(new Sentence(this.sentence)).subscribe(
-        (response) => {
-          console.log('Response from backend:', response);
-        },
-        (error) => {
-          console.error('Error posting sentence:', error);
-        }
-      );
+    if (this.sentence) {
+      this.sentenceService
+        .createSentence(new Sentence(this.sentence))
+        .subscribe(
+          (response) => {
+            console.log('Response from backend:', response);
+            this.sentence = '';
+            this.selectedWord = null;
+            this.selectedType = null;
+            this.getSentences();
+          },
+          (error) => {
+            console.error('Error posting sentence:', error);
+          }
+        );
     }
-    this.sentence = "";
+  }
+
+  deleteAllSentences() {
+    console.log('delete in component');
+    this.sentenceService.deleteAllSentences().subscribe(
+      (response) => {
+        console.log('Response from backend:', response);
+        this.getSentences();
+      },
+      (error) => {
+        console.error('Error posting sentence:', error);
+      }
+    );
   }
 }

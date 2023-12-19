@@ -32,7 +32,7 @@ export class SentenceService {
     return this.http.get<Sentence[]>(`${this.sentenceUrl}/`).pipe(
       catchError((error: HttpErrorResponse) => {
         console.error('Error fetching sentences:', error);
-        return throwError('Something went wrong while sentences.');
+        return throwError('Something went wrong while fetching sentences.');
       })
     );
   }
@@ -50,7 +50,19 @@ export class SentenceService {
   }
 
   createSentence(sentence: Sentence): Observable<any> {
-    console.log("inside post");
     return this.http.post(`${this.sentenceUrl}/create`, sentence);
+  }
+
+  deleteAllSentences(): Observable<any> {
+    console.log("delete in service");
+    return this.http.delete(`${this.sentenceUrl}/delete/all`).pipe(
+      tap((response: any) => {
+        console.log('Response received:', response);
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error deleting sentences:', error);
+        return throwError('Something went wrong while deleting sentences.');
+      })
+    );
   }
 }
