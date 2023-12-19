@@ -1,3 +1,10 @@
+<section id="header">
+  <div>
+    <img src="assets/controller.png" alt="" />
+    <h2>SENTENCE MAKER</h2>
+  </div>
+</section>
+
 <div>
   <label for="wordType">Select Word Type:</label>
   <select
@@ -18,7 +25,7 @@
       {{ word.name }}
     </option>
   </select>
-  <button (click)="addToSentence()">Add to Sentence</button>
+  <button class="btn" (click)="addToSentence()">Add to Sentence</button>
 </div>
 
 <div *ngIf="sentence != ''">
@@ -29,9 +36,9 @@
 <div>
   <ul>
     <li *ngFor="let sentence of sentences">
-      <p>{{sentence.content}}</p>
+      <p>{{ sentence.content }}</p>
     </li>
   </ul>
 </div>
 
-<button (click)="deleteAllSentences()">Delete All Sentences</button>
+<button class="btn btn-success" (click)="deleteAllSentences()">Delete All Sentences</button>
