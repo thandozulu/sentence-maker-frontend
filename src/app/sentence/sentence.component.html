@@ -1,9 +1,35 @@
 <section id="header">
-  <div>
-    <img src="assets/controller.png" alt="" />
-    <h2>SENTENCE MAKER</h2>
+  <div id="header-container" class="container">
+    <img id="logo" src="assets/controller.png" alt="" />
+    <h2 id="title">SENTENCE MAKER</h2>
+  </div>
+  <div id="sub-header-container" class="container">
+    <p>Imagin A World Where Keyboards Don't Exist</p>
   </div>
 </section>
+
+<section>
+  <div class="container-fluid">
+    <div id="content-bar" class="container">
+      <div class="circle"></div>
+      <div class="circle"></div>
+      <div class="circle"></div>
+    </div>
+    <div id="content-window" class="container">
+        <div class="container">
+            <div id="game" class="game-div col-sm-8"></div>
+            <div id="history" class="game-divcol-sm-4"></div>
+        </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- <section id="content">
+    <div id="content-container" class="container-fluid">
+        
+    </div>
+</section> -->
 
 <div>
   <label for="wordType">Select Word Type:</label>
@@ -41,4 +67,6 @@
   </ul>
 </div>
 
-<button class="btn btn-success" (click)="deleteAllSentences()">Delete All Sentences</button>
+<button class="btn btn-success" (click)="deleteAllSentences()">
+  Delete All Sentences
+</button>

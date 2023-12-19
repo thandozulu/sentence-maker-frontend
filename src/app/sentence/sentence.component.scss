@@ -1,0 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap");
+
+#title {
+  font-family: "Silkscreen", sans-serif;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+#header-container {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+
+#sub-header-container {
+  margin-top: 20px;
+}
+
+#content-bar {
+  background-color: #feffc2;
+  border-radius: 20px 20px 0px 0px;
+  display: flex;
+  justify-content: left;
+}
+
+#content-window {
+    background-color: #FFC600;
+    min-height: 700px;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #feffc2;
+  margin: 20px 20px 20px 0px; /* Adjust margin as needed for spacing */
+  border-style: solid;
+  border-color: black;
+  border-width: 3px;
+}
+
+.game-div {
+    background-color: red;
+    min-height:660px;
+    position: relative;
+    top: 20px;
+}
+
+#history {
+    background-color: blue;
+}
