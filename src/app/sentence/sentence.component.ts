@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Type } from '../models/type.model';
 import { Word } from '../models/word.model';
 import { SentenceService } from '../sentence.service';
+import { Sentence } from '../models/sentence.model';
 
 @Component({
   selector: 'app-sentence',
@@ -48,6 +49,16 @@ export class SentenceComponent {
   }
 
   submitSentence() {
-    
+    if(this.sentence){
+      this.sentenceService.createSentence(new Sentence(this.sentence)).subscribe(
+        (response) => {
+          console.log('Response from backend:', response);
+        },
+        (error) => {
+          console.error('Error posting sentence:', error);
+        }
+      );
+    }
+    this.sentence = "";
   }
 }
