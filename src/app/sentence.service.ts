@@ -28,6 +28,15 @@ export class SentenceService {
     );
   }
 
+  getSentences(): Observable<Sentence[]> {
+    return this.http.get<Sentence[]>(`${this.sentenceUrl}/`).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Error fetching sentences:', error);
+        return throwError('Something went wrong while sentences.');
+      })
+    );
+  }
+
   getWordsByType(type: number): Observable<Word[]> {
     return this.http.get<Word[]>(`${this.wordUrl}/${type}`).pipe(
       tap((response: Word[]) => {

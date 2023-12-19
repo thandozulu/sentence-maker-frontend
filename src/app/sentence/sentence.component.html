@@ -3,15 +3,20 @@
   <select
     id="wordType"
     [(ngModel)]="selectedType"
-    (change)="getWordsByType(selectedType)">
-    <option *ngFor="let type of wordTypes" [value]="type.id">{{ type.name }}</option>
+    (change)="getWordsByType(selectedType)"
+  >
+    <option *ngFor="let type of wordTypes" [value]="type.id">
+      {{ type.name }}
+    </option>
   </select>
 </div>
 
 <div *ngIf="selectedType">
   <label for="word">Select Word:</label>
   <select id="word" [(ngModel)]="selectedWord">
-    <option *ngFor="let word of words" [value]="word.name">{{ word.name }}</option>
+    <option *ngFor="let word of words" [value]="word.name">
+      {{ word.name }}
+    </option>
   </select>
   <button (click)="addToSentence()">Add to Sentence</button>
 </div>
@@ -19,4 +24,12 @@
 <div *ngIf="sentence != ''">
   <p>Current Sentence: {{ sentence }}</p>
   <button (click)="submitSentence()">Submit Sentence</button>
+</div>
+
+<div>
+  <ul>
+    <li *ngFor="let sentence of sentences">
+      <p>{{sentence.content}}</p>
+    </li>
+  </ul>
 </div>

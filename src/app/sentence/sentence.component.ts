@@ -15,6 +15,7 @@ export class SentenceComponent {
   selectedWord: string | null = null;
   sentence: string = "";
   words: Word[] = [];
+  sentences: Sentence[] = [];
 
   constructor(private sentenceService: SentenceService) {
   }
@@ -22,6 +23,13 @@ export class SentenceComponent {
     this.selectedType = null;
     this.selectedWord = null;
     this.getWordTypes();
+    this.getSentences();
+  }
+  getSentences() {
+    this.sentenceService.getSentences().subscribe((sentence: Sentence[]) =>{
+      this.sentences = sentence;
+    });
+    console.log(this.sentences);
   }
 
   getWordTypes() {
