@@ -10,14 +10,16 @@ import { SentenceService } from '../sentence.service';
 })
 export class SentenceComponent {
   wordTypes: Type[] = [];
-  selectedType: Type = new Type(0, 'Select A Type');
-  selectedWord: Word | null = null;
-  sentence: Word[] = [];
+  selectedType: number | null = null;
+  selectedWord: string | null = null;
+  sentence: string = "";
   words: Word[] = [];
 
-  constructor(private sentenceService: SentenceService) {}
-
+  constructor(private sentenceService: SentenceService) {
+  }
   ngOnInit(): void {
+    this.selectedType = null;
+    this.selectedWord = null;
     this.getWordTypes();
   }
 
@@ -25,29 +27,27 @@ export class SentenceComponent {
     this.sentenceService.getWordTypes().subscribe((types) => {
       this.wordTypes = types;
     });
+    console.log(this.wordTypes);
   }
 
-  getWordsByType(type: Type | null) {
-    console.log("Selected type : " + this.selectedType.name);
-    console.log("Get words by type : " + type?.name);
+  getWordsByType(type: number | null) {
+    console.log('Get words by type : ' + type);
     if (type) {
       this.sentenceService.getWordsByType(type).subscribe((words) => {
-        this.selectedType = type;
-        this.words = words.map((word) => new Word(word.id, word.name));
+        this.words = words.map((word) => new Word(word.id, word.name, word.type));
       });
     }
   }
 
   addToSentence() {
+    console.log("Selected Word: " + this.selectedWord);
     if (this.selectedWord) {
-      this.sentence.push(this.selectedWord);
+      this.sentence += (" " + this.selectedWord);
       this.selectedWord = null;
     }
   }
 
   submitSentence() {
-    // Send the sentence to the backend or perform any other actions
-    const sentenceString = this.sentence.map((word) => word.name).join(' ');
-    console.log('Submitted Sentence:', sentenceString);
+    
   }
 }
