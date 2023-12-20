@@ -56,7 +56,7 @@ export class SentenceComponent {
     if (this.selectedWord) {
       this.sentence += ' ' + this.selectedWord;
       this.selectedWord = null;
-      this.selectedType = null;
+      this.selectedType = 0;
     }
   }
 
@@ -69,7 +69,7 @@ export class SentenceComponent {
             console.log('Response from backend:', response);
             this.sentence = '';
             this.selectedWord = null;
-            this.selectedType = null;
+            this.selectedType = 0;
             this.getSentences();
           },
           (error) => {

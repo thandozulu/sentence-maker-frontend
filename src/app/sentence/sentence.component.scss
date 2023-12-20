@@ -24,9 +24,9 @@
 }
 
 #content-window {
-    background-color: #FFC600;
-    min-height: 700px;
-    border-radius: 0px 0px 20px 20px;
+  background-color: #ffc600;
+  min-height: 700px;
+  border-radius: 0px 0px 20px 20px;
 }
 
 .circle {
@@ -41,11 +41,22 @@
 }
 
 .game-div {
-    min-height:660px;
-    position: relative;
-    top: 20px;
+  min-height: 660px;
+  margin-top: 20px;
+}
+
+#sentence {
+    font-size: 32px;
+    font-family: "Silkscreen", sans-serif;
+    margin-top: 150px;
+}
+
+#game-footer {
+    margin-top: 60px;
 }
 
 #history {
-    background-color: blue;
+  background-color: #FEFFC2;
+  height: 500px;
+  border-radius: 30;
 }
