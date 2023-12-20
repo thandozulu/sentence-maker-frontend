@@ -29,7 +29,6 @@ export class SentenceComponent {
     this.sentences = [];
     this.sentenceService.getSentences().subscribe((sentence: Sentence[]) => {
       this.sentences = sentence;
-      console.log(this.sentences);
     });
   }
 
@@ -87,7 +86,8 @@ export class SentenceComponent {
         this.getSentences();
       },
       (error) => {
-        console.error('Error posting sentence:', error);
+        console.error('Error deleting sentence:', error);
+        this.getSentences();
       }
     );
   }
