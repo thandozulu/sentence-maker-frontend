@@ -20,7 +20,7 @@ export class SentenceComponent {
   constructor(private sentenceService: SentenceService) {}
 
   ngOnInit(): void {
-    this.selectedType = null;
+    this.selectedType = 0;
     this.selectedWord = null;
     this.getWordTypes();
     this.getSentences();
