@@ -19,113 +19,98 @@
     <div id="content-window" class="container">
       <div class="container">
         <div class="row">
-            <div id="game" class="game-div col-sm-8">
-              <div class="container">
-                <div class="row">
-                  <div class="col-sm-4">
+          <div id="game" class="game-div col-sm-8">
+            <div class="container">
+              <div class="row">
+                <div class="col-sm-4">
+                  <select
+                    class="form-select"
+                    id="wordType"
+                    [(ngModel)]="selectedType"
+                    (change)="getWordsByType(selectedType)"
+                  >
+                    <option value="0" disabled selected>SELECT A TYPE</option>
+                    <option *ngFor="let type of wordTypes" [value]="type.id">
+                      {{ type.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+                  <div *ngIf="selectedType">
                     <select
+                      id="word"
                       class="form-select"
-                      id="wordType"
-                      [(ngModel)]="selectedType"
-                      (change)="getWordsByType(selectedType)"
+                      [(ngModel)]="selectedWord"
                     >
-                      <option value="0" disabled selected>SELECT A TYPE</option>
-                      <option *ngFor="let type of wordTypes" [value]="type.id">
-                        {{ type.name }}
+                      <option value="0" disabled selected>SELECT A WORD</option>
+                      <option *ngFor="let word of words" [value]="word.name">
+                        {{ word.name }}
                       </option>
                     </select>
                   </div>
+                </div>
+                <div class="col-sm-2">
+                  <div *ngIf="selectedType">
+                    <button class="btn btn-dark" (click)="addToSentence()">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div id="sentence-container" class="container">
+                  <div *ngIf="sentence != ''">
+                    <p id="sentence">{{ sentence }}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div id="game-footer" class="row">
+                <div class="container">
                   <div class="col-sm-4">
-                    <div *ngIf="selectedType">
-                      <select
-                        id="word"
-                        class="form-select"
-                        [(ngModel)]="selectedWord"
-                      >
-                        <option value="0" disabled selected>SELECT A WORD</option>
-                        <option *ngFor="let word of words" [value]="word.name">
-                          {{ word.name }}
-                        </option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-2">
-                    <div *ngIf="selectedType">
-                      <button class="btn btn-dark" (click)="addToSentence()">
-                        <i class="fas fa-plus"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-    
-                <div class="row">
-                  <div id="sentence-container" class="container">
-                    <div *ngIf="sentence != ''">
-                      <p id="sentence">{{ sentence }}</p>
-                    </div>
-                  </div>
-                </div>
-    
-                <div id="game-footer" class="row">
-                  <div class="container">
-                    <div class="col-sm-4">
-                      <input
-                        *ngIf="sentence != ''"
-                        type="button"
-                        class="btn btn-primary"
-                        value="SAVE SENTENCE"
-                        (click)="submitSentence()"
-                      />
-                    </div>
+                    <input
+                      *ngIf="sentence != ''"
+                      type="button"
+                      class="btn btn-primary"
+                      value="SAVE SENTENCE"
+                      (click)="submitSentence()"
+                    />
                   </div>
                 </div>
               </div>
             </div>
-    
-            <div id="history" class="game-div col-sm-4"></div>
-            
+          </div>
+
+          <div id="history" class="game-div col-sm-4">
+            <div id="history-header" class="row">
+              <div class="container">
+                <h4>HISTORY</h4>
+              </div>
+            </div>
+            <div id="history-list" class="row">
+              <div class="container">
+                <div col-sm-12>
+                  <div class="scrollable-container">
+                    <div *ngFor="let sentence of sentences">
+                      <p>{{ sentence.content }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="container">
+                  <input
+                    type="button"
+                    id="btn-delete-sentences"
+                    class="btn btn-light"
+                    value="DELETE HISTORY"
+                    (click)="deleteAllSentences()"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
-
-<div>
-  <label for="wordType">Select Word Type:</label>
-  <select
-    id="wordType"
-    [(ngModel)]="selectedType"
-    (change)="getWordsByType(selectedType)"
-  >
-    <option *ngFor="let type of wordTypes" [value]="type.id">
-      {{ type.name }}
-    </option>
-  </select>
-</div>
-
-<div *ngIf="selectedType">
-  <label for="word">Select Word:</label>
-  <select id="word" [(ngModel)]="selectedWord">
-    <option *ngFor="let word of words" [value]="word.name">
-      {{ word.name }}
-    </option>
-  </select>
-  <button class="btn" (click)="addToSentence()">Add to Sentence</button>
-</div>
-
-<div *ngIf="sentence != ''">
-  <p>Current Sentence: {{ sentence }}</p>
-  <button (click)="submitSentence()">Submit Sentence</button>
-</div>
-
-<div>
-  <ul>
-    <li *ngFor="let sentence of sentences">
-      <p>{{ sentence.content }}</p>
-    </li>
-  </ul>
-</div>
-
-<button class="btn btn-success" (click)="deleteAllSentences()">
-  Delete All Sentences
-</button>
